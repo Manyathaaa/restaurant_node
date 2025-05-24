@@ -4,6 +4,7 @@ import morgan from "morgan"; // helps with debugging and monitoring.    HTTP req
 import dotenv from "dotenv"; // This lets you keep sensitive data out of your codebase and manage them securely.
 import testrouter from "./routes/testrouter.js"; // import the test router from the routes folder
 import connectDb from "./config/db.js"; // import the connectDb function to connect to the database
+import mongoose from "mongoose";
 
 const app = express();
 
