@@ -3,11 +3,15 @@ import cors from "cors"; //allowing your server to accept requests from differen
 import morgan from "morgan"; // helps with debugging and monitoring.    HTTP request logger middleware for Node.js.
 import dotenv from "dotenv"; // This lets you keep sensitive data out of your codebase and manage them securely.
 import testrouter from "./routes/testrouter.js"; // import the test router from the routes folder
+import connectDb from "./config/db.js"; // import the connectDb function to connect to the database
 
 const app = express();
 
 //configure dotenv
-dotenv.config();
+dotenv.config(); // you can access these variables in your code using process.env.VARIABLE_NAME
+
+//connection database
+connectDb(); // call the connectDb function to connect to the database
 
 //middlewares
 app.use(morgan("dev")); // use morgan middleware to log requests in development mode...,, dev means development
