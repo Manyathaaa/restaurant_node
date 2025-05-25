@@ -5,6 +5,7 @@ import dotenv from "dotenv"; // This lets you keep sensitive data out of your co
 import testrouter from "./routes/testrouter.js"; // import the test router from the routes folder
 import connectDb from "./config/db.js"; // import the connectDb function to connect to the database
 import mongoose from "mongoose";
+import authroutes from "./routes/authroutes.js";
 
 const app = express();
 
@@ -23,7 +24,8 @@ const PORT = process.env.PORT;
 
 //routes
 
-app.use("/api/v1/test", testrouter); // use the test router for the /api/v1/test route
+app.use("/api/v1/test", testrouter);
+app.use("/api/v1/auth", authroutes); // use the test router for the /api/v1/test route
 // This means that any request to /api/v1/test will be handled by the test router
 // The test router will handle the requests and responses for the /api/v1/test route
 app.get("/", (req, res) => {
