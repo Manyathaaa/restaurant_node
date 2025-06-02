@@ -2,37 +2,32 @@ import express from "express"; // express is a web framework for Node.js
 import cors from "cors"; //allowing your server to accept requests from different domains
 import morgan from "morgan"; // helps with debugging and monitoring.    HTTP request logger middleware for Node.js.
 import dotenv from "dotenv"; // This lets you keep sensitive data out of your codebase and manage them securely.
-import testrouter from "./routes/testrouter.js"; // import the test router from the routes folder
 import connectDb from "./config/db.js"; // import the connectDb function to connect to the database
-import mongoose from "mongoose";
 import authroutes from "./routes/authroutes.js";
 
 const app = express();
 
-//configure dotenv
+// Configure dotenv
 dotenv.config(); // you can access these variables in your code using process.env.VARIABLE_NAME
 
-//connection database
+// Connect to the database
 connectDb(); // call the connectDb function to connect to the database
 
-//middlewares
+// Middlewares
 app.use(morgan("dev")); // use morgan middleware to log requests in development mode...,, dev means development
 app.use(cors()); // use cors middleware
-app.use(express.json()); // use express json middleware to parse JSON requests
+app.use(express.json()); // Parse JSON requests
 
-const PORT = process.env.PORT;
+// Routes
+app.use("/api/v1/auth", authroutes); // Register auth routes
 
-//routes
-
-app.use("/api/v1/test", testrouter);
-app.use("/api/v1/auth", authroutes); // use the test router for the /api/v1/test route
-// This means that any request to /api/v1/test will be handled by the test router
-// The test router will handle the requests and responses for the /api/v1/test route
+// Default route
 app.get("/", (req, res) => {
-  4;
-  res.send("<h1>hello world</h1>");
+  res.send("<h1>Welcome to the API</h1>");
 });
 
+// Start the server
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-  console.log("server is running in port " + PORT);
+  console.log(`Server is running on port ${PORT}`);
 });
