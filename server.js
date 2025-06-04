@@ -10,6 +10,7 @@ import connectDb from "./config/db.js"; // import the connectDb function to conn
 import authroutes from "./routes/authroutes.js";
 import userroutes from "./routes/userroutes.js";
 import testrouter from "./routes/testrouter.js";
+import userModel from "./models/users.js"; // Import user model
 
 const app = express();
 
