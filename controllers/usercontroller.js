@@ -1,6 +1,6 @@
 //get user info
-const getuserController = async (req, res) => {
+export const getuserController = async (req, res) => {
   res.status(200).send("user data");
 };
 
-export default getuserController;
+//module.exports = { getuserController };

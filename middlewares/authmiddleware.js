@@ -3,15 +3,7 @@ import JWT from "jsonwebtoken";
 const authmiddleware = async (req, res, next) => {
   try {
     // Get token from the Authorization header
-    const authHeader = req.headers["authorization"];
-    if (!authHeader) {
-      return res.status(401).send({
-        success: false,
-        message: "Authorization header is missing",
-      });
-    }
-
-    const token = authHeader.split(" ")[1]; // Extract the token
+    const token = req.headers["authorization"]?.split(" ")[1];
     if (!token) {
       return res.status(401).send({
         success: false,
@@ -24,20 +16,21 @@ const authmiddleware = async (req, res, next) => {
       if (err) {
         return res.status(401).send({
           success: false,
-          message: "Invalid token",
+          message: "Unauthorized user",
         });
+      } else {
+        req.user = decoded; // Attach decoded ID to the request body
+        next(); // Proceed to the next middleware or route handler
       }
-      req.user = decoded; // Attach the decoded user info to the request object
-      next(); // Call the next middleware or route handler
     });
   } catch (error) {
-    console.error("Authentication error:", error);
-    return res.status(500).send({
+    console.log(error);
+    res.status(500).send({
       success: false,
-      message: "Internal server error",
-      error: error.message,
+      message: "Error in auth middleware",
+      error,
     });
   }
 };
 
-export default authmiddleware; // Add default export
+export default authmiddleware; // Use ES Module syntax
