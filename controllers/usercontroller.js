@@ -55,8 +55,8 @@ export const UpdateUserController = async (req, res) => {
     }
 
     //update
-    const { username, address, phone } = req.body;
-    if (username) user.username = username;
+    const { name, address, phone } = req.body;
+    if (name) user.name = name;
     if (address) user.address = address;
     if (phone) user.phone = phone;
 
