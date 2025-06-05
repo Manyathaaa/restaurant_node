@@ -1,24 +1,18 @@
-import userModel from "../models/users.js"; // Import user model
+import userModel from "../models/users.js";
 
 export const getuserController = async (req, res) => {
   try {
-    const { id, email, password } = req.body;
+    // Get user ID from decoded token
+    const userId = req.user?.id;
 
-    console.log("Request Body:", req.body); // Log the request body
-
-    let user;
-    if (id) {
-      console.log("Searching by ID:", id); // Log the ID being searched
-      user = await userModel.findById(id);
-    } else if (email && password) {
-      console.log("Searching by Email and Password:", { email, password }); // Log the query
-      user = await userModel.findOne({ email, password });
-    } else {
+    if (!userId) {
       return res.status(400).send({
         success: false,
-        message: "Either ID or Email and Password must be provided",
+        message: "User ID is missing from token",
       });
     }
+
+    const user = await userModel.findById(userId);
 
     if (!user) {
       return res.status(404).send({
@@ -27,7 +21,8 @@ export const getuserController = async (req, res) => {
       });
     }
 
-    user.password = undefined; // Hide password in the response
+    user.password = undefined; // Remove sensitive data
+
     return res.status(200).send({
       success: true,
       message: "User retrieved successfully",
