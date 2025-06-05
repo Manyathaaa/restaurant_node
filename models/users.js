@@ -34,6 +34,10 @@ const userSchema = new mongoose.Schema(
       default:
         "https://cdn3.vectorstock.com/i/1000x1000/51/87/student-avatar-user-profile-icon-vector-47025187.jpg",
     },
+    answer: {
+      type: String,
+      required: [true, "answer is required"],
+    },
   },
   { timestamps: true }
 );

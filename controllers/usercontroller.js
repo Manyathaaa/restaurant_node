@@ -1,4 +1,5 @@
 import userModel from "../models/users.js";
+import bcrypt from "bcrypt";
 
 export const getuserController = async (req, res) => {
   try {
@@ -72,6 +73,43 @@ export const UpdateUserController = async (req, res) => {
     res.status(500).send({
       success: false,
       message: "update failure",
+      error,
+    });
+  }
+};
+
+//resetpassword
+export const resetpasswordController = async (req, res) => {
+  try {
+    const { email, newpassword, answer } = req.body;
+    if (!email || !newpassword || !answer) {
+      return res.status(500).send({
+        success: false,
+        message: "please provide all fields",
+      });
+    }
+    const user = await userModel.findOne({ email, answer });
+    if (!user) {
+      return res.status(500).send({
+        success: false,
+        message: "user not found",
+        error,
+      });
+    }
+    //hashed password
+    var salt = bcrypt.genSaltSync(10);
+    const hashedPassword = await bcrypt.hash(newpassword, salt);
+    user.password = hashedPassword;
+    await user.save();
+    return res.status(400).send({
+      success: true,
+      message: "reset password successfull",
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: "failure in reset password",
       error,
     });
   }

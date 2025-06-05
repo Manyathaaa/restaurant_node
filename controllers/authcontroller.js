@@ -5,8 +5,8 @@ import JWT from "jsonwebtoken"; // JWT is used to create and verify JSON Web Tok
 
 export const registerController = async (req, res) => {
   try {
-    const { username, email, phone, password, address } = req.body;
-    if (!username || !email || !phone || !password || !address) {
+    const { username, email, phone, password, address, answer } = req.body;
+    if (!username || !email || !phone || !password || !address || !answer) {
       return res.status(400).send({
         success: false,
         message: "fill all the requirements",
@@ -33,6 +33,7 @@ export const registerController = async (req, res) => {
       address,
       phone,
       password: hashedPassword,
+      answer,
     });
 
     //check user password | compare password
