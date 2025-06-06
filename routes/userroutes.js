@@ -3,7 +3,8 @@ import {
   getuserController,
   UpdateUserController,
   Updatepasswordcontroller,
-  // resetpasswordController,
+  resetpasswordController,
+  profileDeleteController,
 } from "../controllers/usercontroller.js";
 import authmiddleware from "../middlewares/authmiddleware.js"; // Import authmiddleware
 
@@ -20,6 +21,9 @@ router.put("/updateuser", authmiddleware, UpdateUserController);
 router.post("/updatepassword", authmiddleware, Updatepasswordcontroller);
 
 //reset password
-//router.post("/resetpassword", authmiddleware, resetpasswordController);
+router.post("/resetpassword", authmiddleware, resetpasswordController);
+
+//delete profile
+router.delete("/deleteprofile/:id", authmiddleware, profileDeleteController);
 
 export default router;

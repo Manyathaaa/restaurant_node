@@ -79,41 +79,41 @@ export const UpdateUserController = async (req, res) => {
 };
 
 //resetpassword
-// export const resetpasswordController = async (req, res) => {
-//   try {
-//     const { email, newpassword, answer } = req.body;
-//     if (!email || !newpassword || !answer) {
-//       return res.status(500).send({
-//         success: false,
-//         message: "please provide all fields",
-//       });
-//     }
-//     const user = await userModel.findOne({ email, answer });
-//     if (!user) {
-//       return res.status(500).send({
-//         success: false,
-//         message: "user not found",
-//         error,
-//       });
-//     }
-//     //hashed password
-//     var salt = bcrypt.genSaltSync(10);
-//     const hashedPassword = await bcrypt.hash(newpassword, salt);
-//     user.password = hashedPassword;
-//     await user.save();
-//     return res.status(400).send({
-//       success: true,
-//       message: "reset password successfull",
-//     });
-//   } catch (error) {
-//     console.log(error);
-//     res.status(500).send({
-//       success: false,
-//       message: "failure in reset password",
-//       error,
-//     });
-//   }
-// };
+export const resetpasswordController = async (req, res) => {
+  try {
+    const { email, newpassword, answer } = req.body;
+    if (!email || !newpassword || !answer) {
+      return res.status(500).send({
+        success: false,
+        message: "please provide all fields",
+      });
+    }
+    const user = await userModel.findOne({ email, answer });
+    if (!user) {
+      return res.status(500).send({
+        success: false,
+        message: "user not found",
+        error,
+      });
+    }
+    //hashed password
+    var salt = bcrypt.genSaltSync(10);
+    const hashedPassword = await bcrypt.hash(newpassword, salt);
+    user.password = hashedPassword;
+    await user.save();
+    return res.status(400).send({
+      success: true,
+      message: "reset password successfull",
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: "failure in reset password",
+      error,
+    });
+  }
+};
 
 //update password
 
@@ -164,6 +164,24 @@ export const Updatepasswordcontroller = async (req, res) => {
       success: false,
       message: "Update password failed",
       error: error.message,
+    });
+  }
+};
+
+//delete profile
+export const profileDeleteController = async (req, res) => {
+  try {
+    await userModel.findByIdAndDelete(req.params.id);
+    return res.status(200).send({
+      success: true,
+      message: "profile deleted successfully",
+    });
+  } catch (error) {
+    console.log("something went wrong", error);
+    res.status(404).send({
+      success: false,
+      message: "delete profile failed",
+      error,
     });
   }
 };
