@@ -1,56 +1,33 @@
 import mongoose from "mongoose";
-export const restaurantSchema = new mongoose.Schema(
-  {
-    title: {
-      type: String,
-      required: [true, "title is required"],
+
+const restaurantSchema = new mongoose.Schema({
+  title: { type: String, required: true },
+  imageUrl: { type: String },
+  foods: [
+    {
+      dishName: { type: String },
+      dishPic: { type: String },
+      price: { type: Number },
     },
-    imageUrl: {
-      type: String,
-    },
-    foods: {
-      type: Array,
-    },
-    time: {
-      type: String,
-    },
-    pickup: {
-      type: Boolean,
-      default: true,
-    },
-    delivery: {
-      type: Boolean,
-      default: true,
-    },
-    isOpen: {
-      type: Boolean,
-      default: true,
-    },
-    logoUrl: {
-      type: String,
-    },
-    rating: {
-      type: Number,
-      default: 1,
-      min: 1,
-      max: 5,
-    },
-    ratingCount: {
-      type: Number,
-      default: 0,
-    },
-    code: {
-      type: String,
-    },
-    coords: {
-      id: { type: String },
-      latitude: { type: Number },
-      latitudeDelta: { type: Number },
-      longitude: { type: Number },
-      longitudeDelta: { type: Number },
-      address: { type: String },
-      title: { type: String },
-    },
+  ],
+  time: { type: String },
+  pickup: { type: Boolean },
+  delivery: { type: Boolean },
+  isOpen: { type: Boolean },
+  logoUrl: { type: String },
+  rating: { type: Number },
+  ratingCount: { type: Number },
+  code: { type: Number },
+  coords: {
+    id: { type: Number },
+    latitude: { type: Number },
+    latitudeDelta: { type: Number },
+    longitude: { type: Number },
+    longitudeDelta: { type: Number },
   },
-  { timestamps: true }
-);
+  address: { type: String },
+});
+
+const restaurantModel = mongoose.model("Restaurant", restaurantSchema);
+
+export default restaurantModel;
