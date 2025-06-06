@@ -30,7 +30,7 @@ app.use(express.json()); // Parse JSON requests
 app.use("/api/v1/auth", authroutes); // Register auth routes
 app.use("/api/v1/test", testrouter);
 app.use("/api/v1/user", userroutes);
-app.use("api/v1/restaurant", restaurantroutes);
+app.use("/api/v1/restaurant", restaurantroutes);
 
 // Default route
 app.get("/", (req, res) => {
