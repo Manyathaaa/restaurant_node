@@ -3,6 +3,7 @@ import authmiddleware from "../middlewares/authmiddleware.js";
 import {
   createfoodController,
   getallfoodController,
+  updatefoodController,
 } from "../controllers/foodcontrollers.js";
 
 const router = express.Router();
@@ -12,5 +13,8 @@ router.post("/create", authmiddleware, createfoodController);
 
 //getall food
 router.get("/getall", authmiddleware, getallfoodController);
+
+//update food
+router.put("/update/:id", authmiddleware, updatefoodController);
 
 export default router;
