@@ -3,7 +3,7 @@ import authmiddleware from "../middlewares/authmiddleware.js";
 import {
   createcategoryController,
   getcategoryController,
-  //updatecategoryController,
+  updatecategoryController,
 } from "../controllers/categorycontroller.js";
 
 const router = express.Router();
@@ -15,6 +15,6 @@ router.post("/create", authmiddleware, createcategoryController);
 router.get("/getall", authmiddleware, getcategoryController);
 
 //update category
-//router.put("/update",authmiddleware, updatecategoryController);
+router.put("/update/:id", authmiddleware, updatecategoryController);
 
 export default router;
