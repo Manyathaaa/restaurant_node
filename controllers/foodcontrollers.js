@@ -118,3 +118,28 @@ export const updatefoodController = async (req, res) => {
     });
   }
 };
+
+//delete food
+
+export const deletefoodByIdController = async (req, res) => {
+  try {
+    const foodId = req.params.id;
+    if (!foodId) {
+      return res.status(500).send({
+        success: false,
+        message: "provide id",
+      });
+    }
+    await foodModels.findByIdAndDelete(foodId);
+    res.status(200).send({
+      success: true,
+      message: "successfully deleted",
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(404).send({
+      success: false,
+      message: "deletion failed",
+    });
+  }
+};
