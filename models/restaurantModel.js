@@ -10,6 +10,7 @@ const restaurantSchema = new mongoose.Schema({
       price: { type: Number },
     },
   ],
+
   time: { type: String },
   pickup: { type: Boolean },
   delivery: { type: Boolean },

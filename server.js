@@ -13,6 +13,7 @@ import testrouter from "./routes/testrouter.js";
 import userModel from "./models/users.js"; // Import user model
 import restaurantroutes from "./routes/restaurantroutes.js";
 import categoryroutes from "./routes/categoryroutes.js";
+import foodroutes from "./routes/foodroutes.js";
 
 const app = express();
 
@@ -33,6 +34,7 @@ app.use("/api/v1/test", testrouter);
 app.use("/api/v1/user", userroutes);
 app.use("/api/v1/restaurant", restaurantroutes);
 app.use("/api/v1/category", categoryroutes);
+app.use("/api/v1/food", foodroutes);
 
 // Default route
 app.get("/", (req, res) => {
