@@ -77,3 +77,29 @@ export const getrestaurantByIdController = async (req, res) => {
     });
   }
 };
+
+//delete restaurant by id
+export const deleterestaurantByIdController = async (req, res) => {
+  try {
+    const restaurantId = req.params.id;
+    if (!restaurantId) {
+      return res.status(500).send({
+        success: false,
+        message: "id not provided",
+      });
+    }
+
+    await restaurantModel.findByIdAndDelete(restaurantId);
+    return res.status(200).send({
+      success: true,
+      message: "deleted successfully",
+    });
+  } catch (error) {
+    console.log("something went wrong", error);
+    return res.status(404).send({
+      success: false,
+      message: "deletion failed",
+      error,
+    });
+  }
+};
