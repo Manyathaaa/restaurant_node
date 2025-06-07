@@ -12,6 +12,7 @@ import userroutes from "./routes/userroutes.js";
 import testrouter from "./routes/testrouter.js";
 import userModel from "./models/users.js"; // Import user model
 import restaurantroutes from "./routes/restaurantroutes.js";
+import categoryroutes from "./routes/categoryroutes.js";
 
 const app = express();
 
@@ -31,6 +32,7 @@ app.use("/api/v1/auth", authroutes); // Register auth routes
 app.use("/api/v1/test", testrouter);
 app.use("/api/v1/user", userroutes);
 app.use("/api/v1/restaurant", restaurantroutes);
+app.use("/api/v1/category", categoryroutes);
 
 // Default route
 app.get("/", (req, res) => {
