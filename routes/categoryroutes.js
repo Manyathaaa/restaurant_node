@@ -4,6 +4,7 @@ import {
   createcategoryController,
   getcategoryController,
   updatecategoryController,
+  deletecategoryByIdController,
 } from "../controllers/categorycontroller.js";
 
 const router = express.Router();
@@ -16,5 +17,8 @@ router.get("/getall", authmiddleware, getcategoryController);
 
 //update category
 router.put("/update/:id", authmiddleware, updatecategoryController);
+
+//delete category
+router.delete("/delete/:id", authmiddleware, deletecategoryByIdController);
 
 export default router;
