@@ -25,3 +25,30 @@ export const createcategoryController = async (req, res) => {
     });
   }
 };
+
+//getall categories
+
+export const getcategoryController = async (req, res) => {
+  try {
+    const categories = await categoryModel.find({});
+    if (!categories) {
+      return res.status(500).send({
+        success: false,
+        message: "no categories found",
+      });
+    }
+    res.status(200).send({
+      success: true,
+      message: "successfully got all",
+      totalCategories: categories.length,
+      categories,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(404).send({
+      success: false,
+      message: "failed to get all categories",
+      error,
+    });
+  }
+};
