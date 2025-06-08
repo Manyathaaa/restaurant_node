@@ -1,4 +1,4 @@
-import userModel from "../models/users.js";
+import userModel from "../models/usersModel.js";
 import bcrypt from "bcryptjs"; // bcryptjs is a library to hash passwords
 // bcrypt is used to hash passwords before storing them in the database
 import JWT from "jsonwebtoken"; // JWT is used to create and verify JSON Web Tokens, which are used for authentication and authorization

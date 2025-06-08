@@ -10,7 +10,7 @@ import connectDb from "./config/db.js"; // import the connectDb function to conn
 import authroutes from "./routes/authroutes.js";
 import userroutes from "./routes/userroutes.js";
 import testrouter from "./routes/testrouter.js";
-import userModel from "./models/users.js"; // Import user model
+import userModel from "./models/usersModel.js"; // Import user model
 import restaurantroutes from "./routes/restaurantroutes.js";
 import categoryroutes from "./routes/categoryroutes.js";
 import foodroutes from "./routes/foodroutes.js";
