@@ -1,4 +1,5 @@
 import foodModels from "../models/foodModels.js";
+import orderModels from "../models/orderModels.js";
 
 export const createfoodController = async (req, res) => {
   try {
@@ -140,6 +141,44 @@ export const deletefoodByIdController = async (req, res) => {
     return res.status(404).send({
       success: false,
       message: "deletion failed",
+    });
+  }
+};
+
+//place oder
+export const createOrderController = async (req, res) => {
+  try {
+    const { foods, payment, buyer, status } = req.body;
+
+    // Validate required fields
+    if (!foods || foods.length === 0 || !payment) {
+      return res.status(400).send({
+        success: false,
+        message: "Please provide food in cart or payment method",
+      });
+    }
+
+    // Create the order
+    const newOrder = new orderModels({
+      foods,
+      payment,
+      buyer,
+      status: status || "preparing", // Default status if not provided
+    });
+
+    await newOrder.save();
+
+    return res.status(201).send({
+      success: true,
+      message: "Order created successfully",
+      order: newOrder,
+    });
+  } catch (error) {
+    console.log("Error in creating order:", error);
+    return res.status(500).send({
+      success: false,
+      message: "Failed to create order",
+      error: error.message,
     });
   }
 };

@@ -5,6 +5,7 @@ import {
   getallfoodController,
   updatefoodController,
   deletefoodByIdController,
+  createOrderController,
 } from "../controllers/foodcontrollers.js";
 
 const router = express.Router();
@@ -20,5 +21,8 @@ router.put("/update/:id", authmiddleware, updatefoodController);
 
 //delete food
 router.delete("/delete/:id", authmiddleware, deletefoodByIdController);
+
+//place order
+router.post("/placeorder", authmiddleware, createOrderController);
 
 export default router;
