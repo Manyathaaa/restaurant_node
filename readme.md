@@ -112,7 +112,7 @@ A RESTful API for restaurant management built with Node.js, Express, and MongoDB
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/manyathaaa/restaurant-node.git
+   git clone https://github.com/manyatha/restaurant-node.git
    cd restaurant-node
    ```
 
@@ -134,7 +134,7 @@ A RESTful API for restaurant management built with Node.js, Express, and MongoDB
 ## Folder Structure
 
 ```
-restaurant_node/
+my1stpro/
 │
 ├── controllers/
 │   └── foodcontrollers.js
